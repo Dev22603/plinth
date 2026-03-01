@@ -42,7 +42,7 @@
 ## 2. TECH STACK & SETUP
 
 ### Framework
-- **Next.js 14** (App Router)
+- **Next.js 16** (App Router)
 - Use `app/page.tsx` as the root page
 - No dynamic routes needed — this is a single static page
 
@@ -50,7 +50,7 @@
 - **TypeScript** throughout. No `any` types.
 
 ### Styling
-- **Tailwind CSS v3** for utility classes
+- **Tailwind CSS v4** for utility classes
 - **Custom CSS variables** defined in `globals.css` for the color palette and type scale
 - Do **not** use inline styles for anything that belongs in the design system
 
