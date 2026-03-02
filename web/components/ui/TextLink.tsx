@@ -15,7 +15,7 @@ export default function TextLink({ href, label, arrow, external }: TextLinkProps
     );
 
     const className =
-        "font-sans text-[16px] font-bold text-black underline decoration-2 underline-offset-[4px] decoration-[var(--color-pink)] transition-colors duration-200 hover:text-[var(--color-teal)] hover:decoration-black";
+        "font-sans text-[16px] font-bold text-black underline decoration-2 underline-offset-4 decoration-pink transition-colors duration-200 hover:text-teal hover:decoration-black";
 
     if (external) {
         return (

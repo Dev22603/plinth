@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <footer className="bg-black text-white">
             {/* Accent bar */}
-            <div className="h-16 w-full bg-[var(--color-teal)] border-b-4 border-black"></div>
+            <div className="h-16 w-full bg-teal border-b-4 border-black"></div>
 
             <div className="container py-16">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b-2 border-white/20 pb-16">
@@ -18,7 +18,7 @@ export default function Footer() {
                     </div>
 
                     <div className="flex flex-col gap-4">
-                        <a href="mailto:hello@plinth.agency" className="text-[24px] font-bold hover:text-[var(--color-pink)] transition-colors">hello@plinth.agency</a>
+                        <a href="mailto:hello@plinth.agency" className="text-[24px] font-bold hover:text-pink transition-colors">hello@plinth.agency</a>
                     </div>
                 </div>
 

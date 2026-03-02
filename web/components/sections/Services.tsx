@@ -3,14 +3,14 @@
 import { motion } from "motion/react";
 import { services } from "../../lib/data";
 
-const bgColors = ["bg-[var(--color-pink)]", "bg-[var(--color-yellow)]", "bg-[var(--color-teal)]"];
+const bgColors = ["bg-pink", "bg-yellow", "bg-teal"];
 
 export default function Services() {
     return (
-        <section id="services" className="border-t-4 border-black bg-[var(--color-off-white)] py-24 md:py-36">
+        <section id="services" className="border-t-4 border-black bg-off-white py-24 md:py-36">
             <div className="container">
                 <div className="mb-20 text-center">
-                    <h2 className="font-sans text-[var(--text-display)] font-black tracking-tighter text-black">
+                    <h2 className="font-sans text-(--text-display) font-black tracking-tighter text-black">
                         What we do.
                     </h2>
                 </div>

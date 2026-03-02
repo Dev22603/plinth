@@ -33,8 +33,8 @@ export default function Navbar() {
         <>
             <nav
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                        ? "border-b-[2px] border-solid border-black bg-white"
-                        : "bg-transparent"
+                    ? "border-b-[2px] border-solid border-black bg-white"
+                    : "bg-transparent"
                     }`}
             >
                 <div className="container flex h-[80px] items-center justify-between px-8">
@@ -63,7 +63,7 @@ export default function Navbar() {
 
                     {/* Mobile Nav Toggle */}
                     <button
-                        className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-[var(--color-yellow)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hidden"
+                        className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-yellow shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hidden"
                         onClick={() => setIsMobileMenuOpen(true)}
                     >
                         <svg className="h-6 w-6" fill="none" stroke="black" viewBox="0 0 24 24">
@@ -75,7 +75,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-[60] flex flex-col bg-[var(--color-pink)] px-8 pt-6 md:hidden">
+                <div className="fixed inset-0 z-[60] flex flex-col bg-pink px-8 pt-6 md:hidden">
                     <div className="flex justify-end">
                         <button
                             className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-black bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-[24px] font-black"
