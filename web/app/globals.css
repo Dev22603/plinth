@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
+@theme {
+  --color-pink: #FF90E8;
+  --color-pink-light: #FFB3ED;
+  --color-yellow: #F6D800;
+  --color-yellow-dark: #F4C430;
+  --color-yellow-bright: #FFFE00;
+  --color-teal: #23A094;
+  --color-teal-dark: #1E8A7F;
+  --color-blue: #7BA4DB;
+  --color-blue-light: #A8C5E8;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-off-white: #F9F9F9;
+  --color-gray-light: #E5E5E5;
+  --color-gray-medium: #8E8E8E;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Gumroad Neo-Brutalist Colors */
+  --color-pink: #FF90E8;
+  --color-yellow: #F6D800;
+  --color-teal: #23A094;
+  --color-blue: #7BA4DB;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-off-white: #F9F9F9;
+  --color-gray-light: #E5E5E5;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Typography matching Gumroad */
+  --text-hero: clamp(64px, 8vw, 96px);
+  --text-display: clamp(48px, 6vw, 72px);
+  --text-heading: clamp(32px, 4vw, 48px);
+  --text-xl: 24px;
+  --text-lg: 20px;
+  --text-body: 16px;
+  --text-sm: 14px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-off-white);
+  color: var(--color-black);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 40px);
 }
