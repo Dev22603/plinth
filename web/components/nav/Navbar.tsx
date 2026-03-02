@@ -82,7 +82,7 @@ export default function Navbar() {
                             onClick={() => setIsMobileMenuOpen(false)}
                             aria-label="Close Menu"
                         >
-                            \u2715
+                            ✕
                         </button>
                     </div>
                     <div className="flex flex-1 flex-col items-center justify-center gap-12">
