@@ -1,57 +1,169 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useRef, useEffect, useState } from "react";
 import { caseStudies } from "../../lib/data";
 
 export default function Work() {
-    return (
-        <section id="work" className="border-t-4 border-black bg-white py-24 md:py-36">
-            <div className="container">
-                <h2 className="mb-20 font-sans text-(--text-display) font-black tracking-tighter text-black md:text-center">
-                    Projects we&apos;ve built.
-                </h2>
+    const sectionRef = useRef<HTMLElement>(null);
+    const [visible, setVisible] = useState(false);
 
-                <div className="mx-auto max-w-5xl space-y-16">
-                    {caseStudies.map((study) => (
-                        <motion.div
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+            { threshold: 0.05 }
+        );
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <section
+            id="work"
+            ref={sectionRef}
+            style={{
+                background: "var(--off-white)",
+                padding: "clamp(64px, 10vw, 120px) 0",
+                borderTop: "4px solid #000",
+            }}
+        >
+            <div className="container">
+                {/* Header */}
+                <div
+                    style={{
+                        opacity: visible ? 1 : 0,
+                        transform: visible ? "translateY(0)" : "translateY(32px)",
+                        transition: "opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
+                        marginBottom: "clamp(48px, 6vw, 80px)",
+                    }}
+                >
+                    <p style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "12px",
+                        fontWeight: 700,
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        color: "var(--teal)",
+                        marginBottom: "16px",
+                    }}>
+                        Selected projects
+                    </p>
+                    <h2 style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "var(--text-display)",
+                        fontWeight: 900,
+                        letterSpacing: "-0.04em",
+                        lineHeight: 0.95,
+                        color: "#000",
+                    }}>
+                        Things we&apos;ve<br />
+                        <span style={{ color: "var(--teal)" }}>actually built.</span>
+                    </h2>
+                </div>
+
+                {/* Project cards */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+                    {caseStudies.map((study, index) => (
+                        <div
                             key={study.id}
-                            initial={{ opacity: 0, scale: 0.95, y: 40 }}
-                            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.7, type: "spring", bounce: 0.3 }}
-                            className="group overflow-hidden rounded-4xl border-4 border-black bg-off-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)]"
+                            style={{
+                                background: "#fff",
+                                borderRadius: "24px",
+                                border: "3px solid #000",
+                                overflow: "hidden",
+                                boxShadow: "8px 8px 0px #000",
+                                opacity: visible ? 1 : 0,
+                                transform: visible ? "translateY(0)" : "translateY(56px)",
+                                transition: `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + index * 0.15}s`,
+                            }}
                         >
                             {/* Header bar */}
-                            <div className="flex items-center justify-between border-b-4 border-black bg-yellow px-8 py-6">
+                            <div style={{
+                                background: index % 2 === 0 ? "#F6D800" : "#FF90E8",
+                                borderBottom: "3px solid #000",
+                                padding: "clamp(20px, 3vw, 32px) clamp(24px, 4vw, 48px)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                flexWrap: "wrap",
+                                gap: "16px",
+                            }}>
                                 <div>
-                                    <div className="mb-2 inline-block -rotate-1 rounded-full border-2 border-black bg-white px-4 py-1 font-sans text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                    <span style={{
+                                        display: "inline-block",
+                                        borderRadius: "9999px",
+                                        border: "2px solid #000",
+                                        background: "#fff",
+                                        padding: "4px 14px",
+                                        fontSize: "12px",
+                                        fontWeight: 700,
+                                        letterSpacing: "0.04em",
+                                        textTransform: "uppercase",
+                                        color: "#000",
+                                        marginBottom: "12px",
+                                        transform: "rotate(-1deg)",
+                                    }}>
                                         {study.label}
-                                    </div>
-                                    <h3 className="font-sans text-[28px] font-black leading-none text-black">
+                                    </span>
+                                    <h3 style={{
+                                        fontFamily: "var(--font-display)",
+                                        fontSize: "clamp(22px, 3vw, 32px)",
+                                        fontWeight: 900,
+                                        letterSpacing: "-0.03em",
+                                        lineHeight: 1.1,
+                                        color: "#000",
+                                    }}>
                                         {study.project}
                                     </h3>
                                 </div>
+
+                                {/* Index number */}
+                                <span style={{
+                                    fontFamily: "var(--font-display)",
+                                    fontSize: "64px",
+                                    fontWeight: 900,
+                                    letterSpacing: "-0.06em",
+                                    color: "rgba(0,0,0,0.15)",
+                                    lineHeight: 1,
+                                }}>
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
                             </div>
 
                             {/* Body */}
-                            <div className="grid grid-cols-1 lg:grid-cols-12">
-                                {/* Description */}
-                                <div className="border-b-4 border-black bg-white p-8 lg:col-span-5 lg:border-b-0 lg:border-r-4 lg:p-12 flex flex-col justify-between">
-                                    <p className="font-sans text-[18px] font-medium leading-[1.7] text-black">
+                            <div style={{
+                                display: "grid",
+                                gridTemplateColumns: "minmax(0,5fr) minmax(0,7fr)",
+                            }}
+                                className="work-body"
+                            >
+                                {/* Left — description + links */}
+                                <div style={{
+                                    padding: "clamp(24px, 4vw, 48px)",
+                                    borderRight: "3px solid #E5E5E5",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between",
+                                    gap: "32px",
+                                }}>
+                                    <p style={{
+                                        fontSize: "clamp(15px, 1.5vw, 18px)",
+                                        lineHeight: 1.7,
+                                        color: "#000",
+                                        fontWeight: 400,
+                                    }}>
                                         {study.description}
                                     </p>
 
-                                    {/* Demo links */}
-                                    <div className="mt-8 flex flex-col gap-3">
+                                    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                                         {study.links.live && (
                                             <a
                                                 href={study.links.live}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 rounded-full border-4 border-black bg-teal px-6 py-3 font-sans text-[15px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-1 hover:translate-x-1 hover:shadow-none"
+                                                className="btn btn-teal"
+                                                style={{ textDecoration: "none", fontSize: "14px" }}
                                             >
-                                                <span>View Live Product</span>
-                                                <span aria-hidden>→</span>
+                                                View live product →
                                             </a>
                                         )}
                                         {study.links.demo && (
@@ -59,36 +171,73 @@ export default function Work() {
                                                 href={study.links.demo}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 rounded-full border-4 border-black bg-pink px-6 py-3 font-sans text-[15px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-1 hover:translate-x-1 hover:shadow-none"
+                                                className="btn"
+                                                style={{
+                                                    background: "#FF90E8",
+                                                    color: "#000",
+                                                    borderColor: "#000",
+                                                    textDecoration: "none",
+                                                    fontSize: "14px",
+                                                }}
                                             >
-                                                <span>Watch Demo</span>
-                                                <span aria-hidden>▶</span>
+                                                ▶ Watch demo
                                             </a>
                                         )}
                                         {!study.links.live && !study.links.demo && (
-                                            <span className="inline-block rounded-full border-2 border-black/20 px-6 py-3 font-sans text-[14px] font-bold text-black/40">
+                                            <span style={{
+                                                display: "inline-block",
+                                                borderRadius: "9999px",
+                                                border: "2px dashed #E5E5E5",
+                                                padding: "12px 24px",
+                                                fontSize: "14px",
+                                                fontWeight: 600,
+                                                color: "#8E8E8E",
+                                                textAlign: "center",
+                                            }}>
                                                 Demo coming soon
                                             </span>
                                         )}
                                     </div>
                                 </div>
 
-                                {/* Prose */}
-                                <div className="p-8 lg:col-span-7 lg:p-12">
-                                    {study.prose.map((paragraph, i) => (
+                                {/* Right — prose */}
+                                <div style={{
+                                    padding: "clamp(24px, 4vw, 48px)",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "20px",
+                                }}>
+                                    {study.prose.map((para: string, i: number) => (
                                         <p
                                             key={i}
-                                            className="mb-6 font-sans text-[18px] font-medium leading-[1.7] text-black last:mb-0"
+                                            style={{
+                                                fontSize: "clamp(15px, 1.5vw, 17px)",
+                                                lineHeight: 1.75,
+                                                color: i === 0 ? "#000" : "#555",
+                                                fontWeight: i === 0 ? 500 : 400,
+                                            }}
                                         >
-                                            {paragraph}
+                                            {para}
                                         </p>
                                     ))}
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 768px) {
+                    .work-body {
+                        grid-template-columns: 1fr !important;
+                    }
+                    .work-body > div:first-child {
+                        border-right: none !important;
+                        border-bottom: 3px solid #E5E5E5;
+                    }
+                }
+            `}</style>
         </section>
     );
 }

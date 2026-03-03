@@ -1,46 +1,190 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useRef, useEffect, useState } from "react";
 import { contactData } from "../../lib/data";
 
 export default function Contact() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+            { threshold: 0.1 }
+        );
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <section id="contact" className="overflow-hidden border-t-4 border-black bg-pink py-24 md:py-36">
-            <div className="mx-auto max-w-4xl px-[clamp(24px,5vw,80px)] text-center">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 32 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.7, type: "spring", bounce: 0.4 }}
-                    className="rounded-4xl border-4 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:p-24 md:shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] text-center"
-                >
-                    <div className="mb-8 inline-block -rotate-3 transform rounded-full border-2 border-black bg-yellow px-6 py-2 font-sans text-[16px] font-bold tracking-wide text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                        Contact
+        <section
+            id="contact"
+            ref={sectionRef}
+            style={{
+                background: "#23A094",
+                borderTop: "4px solid #000",
+                padding: "clamp(64px, 10vw, 120px) 0",
+                position: "relative",
+                overflow: "hidden",
+            }}
+        >
+            {/* background decoration */}
+            <div
+                aria-hidden="true"
+                style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    fontSize: "clamp(100px, 18vw, 220px)",
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 900,
+                    letterSpacing: "-0.06em",
+                    color: "rgba(255,255,255,0.05)",
+                    whiteSpace: "nowrap",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                }}
+            >
+                HELLO
+            </div>
+
+            <div className="container" style={{ position: "relative", zIndex: 1 }}>
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                    gap: "clamp(40px, 6vw, 80px)",
+                    alignItems: "center",
+                }}>
+                    {/* Left text */}
+                    <div
+                        style={{
+                            opacity: visible ? 1 : 0,
+                            transform: visible ? "translateX(0)" : "translateX(-40px)",
+                            transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+                        }}
+                    >
+                        <span style={{
+                            display: "inline-block",
+                            borderRadius: "9999px",
+                            border: "2px solid rgba(255,255,255,0.3)",
+                            padding: "6px 18px",
+                            fontSize: "12px",
+                            fontWeight: 700,
+                            letterSpacing: "0.1em",
+                            textTransform: "uppercase",
+                            color: "#fff",
+                            marginBottom: "32px",
+                            fontFamily: "var(--font-display)",
+                        }}>
+                            Let&apos;s talk
+                        </span>
+
+                        <h2 style={{
+                            fontFamily: "var(--font-display)",
+                            fontSize: "var(--text-display)",
+                            fontWeight: 900,
+                            letterSpacing: "-0.04em",
+                            lineHeight: 0.95,
+                            color: "#fff",
+                            marginBottom: "32px",
+                        }}>
+                            Let&apos;s work<br />
+                            <span style={{ color: "#F6D800" }}>together.</span>
+                        </h2>
+
+                        <p style={{
+                            fontSize: "clamp(16px, 1.8vw, 20px)",
+                            lineHeight: 1.65,
+                            color: "rgba(255,255,255,0.8)",
+                            fontWeight: 400,
+                            maxWidth: "440px",
+                        }}>
+                            For project inquiries, collaborations, or just a conversation about your platform architecture.
+                        </p>
                     </div>
 
-                    <h2 className="mb-8 font-sans text-(--text-display) font-black tracking-tighter text-black leading-none">
-                        Let&apos;s work together.
-                    </h2>
+                    {/* Right CTA card */}
+                    <div
+                        style={{
+                            opacity: visible ? 1 : 0,
+                            transform: visible ? "translateX(0)" : "translateX(40px)",
+                            transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s, transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.15s",
+                        }}
+                    >
+                        <div style={{
+                            background: "#fff",
+                            borderRadius: "24px",
+                            border: "3px solid #000",
+                            padding: "clamp(32px, 5vw, 56px)",
+                            boxShadow: "8px 8px 0px #000",
+                        }}>
+                            <div style={{ marginBottom: "32px" }}>
+                                {/* Floating coin decoration */}
+                                <div
+                                    className="animate-float"
+                                    style={{
+                                        width: "72px",
+                                        height: "72px",
+                                        borderRadius: "9999px",
+                                        background: "#F6D800",
+                                        border: "3px solid #000",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        fontSize: "32px",
+                                        fontWeight: 900,
+                                        fontFamily: "var(--font-display)",
+                                        marginBottom: "24px",
+                                        "--r": "-8deg",
+                                    } as React.CSSProperties}
+                                >
+                                    ✉
+                                </div>
 
-                    <p className="mx-auto mb-16 max-w-2xl font-sans text-[24px] font-medium leading-[1.6] text-black">
-                        For project inquiries, collaborations, or discussing your platform architecture.
-                    </p>
+                                <h3 style={{
+                                    fontFamily: "var(--font-display)",
+                                    fontSize: "26px",
+                                    fontWeight: 800,
+                                    letterSpacing: "-0.03em",
+                                    color: "#000",
+                                    marginBottom: "12px",
+                                }}>
+                                    Start a conversation
+                                </h3>
+                                <p style={{ fontSize: "15px", lineHeight: 1.65, color: "#8E8E8E" }}>
+                                    Fill out our brief form and we&apos;ll get back to you within 24 hours.
+                                </p>
+                            </div>
 
-                    <div className="flex flex-col items-center justify-center gap-6 md:flex-row mb-16">
-                        <a
-                            href={contactData.formUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full md:w-auto rounded-full border-4 border-black bg-teal px-8 py-4 font-sans text-[16px] sm:text-[20px] md:text-[22px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-2 hover:translate-x-2 hover:shadow-none"
-                        >
-                            Fill out our contact form →
-                        </a>
+                            <a
+                                href={contactData.formUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-yellow"
+                                style={{
+                                    width: "100%",
+                                    fontSize: "17px",
+                                    padding: "18px 32px",
+                                    marginBottom: "16px",
+                                    textDecoration: "none",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                Fill out our contact form →
+                            </a>
+
+                            <p style={{
+                                textAlign: "center",
+                                fontSize: "13px",
+                                color: "#8E8E8E",
+                                fontWeight: 500,
+                            }}>
+                                {contactData.note}
+                            </p>
+                        </div>
                     </div>
-
-                    <p className="font-sans text-[16px] font-bold text-black/60">
-                        {contactData.note}
-                    </p>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

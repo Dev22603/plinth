@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
 @theme {
   --color-pink: #FF90E8;
   --color-pink-light: #FFB3ED;
   --color-yellow: #F6D800;
-  --color-yellow-dark: #F4C430;
   --color-yellow-bright: #FFFE00;
   --color-teal: #23A094;
   --color-teal-dark: #1E8A7F;
@@ -14,42 +14,272 @@
   --color-white: #FFFFFF;
   --color-off-white: #F9F9F9;
   --color-gray-light: #E5E5E5;
-  --color-gray-medium: #8E8E8E;
+  --color-gray-mid: #8E8E8E;
 }
 
 :root {
-  /* Gumroad Neo-Brutalist Colors */
-  --color-pink: #FF90E8;
-  --color-yellow: #F6D800;
-  --color-teal: #23A094;
-  --color-blue: #7BA4DB;
-  --color-black: #000000;
-  --color-white: #FFFFFF;
-  --color-off-white: #F9F9F9;
-  --color-gray-light: #E5E5E5;
+  --pink: #FF90E8;
+  --pink-light: #FFB3ED;
+  --yellow: #F6D800;
+  --yellow-bright: #FFFE00;
+  --teal: #23A094;
+  --teal-dark: #1E8A7F;
+  --blue: #7BA4DB;
+  --black: #000000;
+  --white: #FFFFFF;
+  --off-white: #F9F9F9;
+  --gray-light: #E5E5E5;
+  --gray-mid: #8E8E8E;
 
-  /* Typography matching Gumroad */
-  --text-hero: clamp(64px, 8vw, 96px);
-  --text-display: clamp(48px, 6vw, 72px);
-  --text-heading: clamp(32px, 4vw, 48px);
+  --font-display: var(--font-cabinet), 'Cabinet Grotesk', system-ui, sans-serif;
+  --font-body: var(--font-satoshi), 'Satoshi', system-ui, sans-serif;
+
+  --text-hero: clamp(64px, 9vw, 96px);
+  --text-display: clamp(44px, 6vw, 72px);
+  --text-heading: clamp(28px, 4vw, 48px);
   --text-xl: 24px;
   --text-lg: 20px;
   --text-body: 16px;
   --text-sm: 14px;
 }
 
+/* ─── Global Reset ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--color-off-white);
-  color: var(--color-black);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: var(--off-white);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
+::selection {
+  background-color: var(--pink);
+  color: var(--black);
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+h1 { font-size: var(--text-hero); }
+h2 { font-size: var(--text-display); }
+h3 { font-size: var(--text-heading); }
+
+/* ─── Layout ─────────────────────────────────────────────────────────────── */
 .container {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 5vw, 40px);
+  padding: 0 clamp(20px, 5vw, 80px);
 }
+
+.container--narrow {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 60px);
+}
+
+/* ─── Keyframe Animations ────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%       { transform: translateY(-14px) rotate(var(--r, 0deg)); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)) scale(1); }
+  50%       { transform: translateY(-10px) rotate(var(--r, 0deg)) scale(1.02); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 144, 232, 0.4); }
+  50%       { box-shadow: 0 0 32px 8px rgba(255, 144, 232, 0.2); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+/* ─── Nav Underline Hover ────────────────────────────────────────────────── */
+.nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--black);
+  transition: width 200ms ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ─── Coin Decorations ───────────────────────────────────────────────────── */
+.coin {
+  border-radius: 9999px;
+  border: 4px solid var(--black);
+  background: var(--pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--black);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 14px 32px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 150ms ease;
+  border: 2px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.btn-primary:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--black);
+  border-color: var(--black);
+}
+
+.btn-outline:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btn-teal {
+  background: var(--teal);
+  color: var(--white);
+  border-color: var(--teal);
+}
+
+.btn-teal:hover {
+  background: var(--teal-dark);
+  border-color: var(--teal-dark);
+}
+
+.btn-yellow {
+  background: var(--yellow);
+  color: var(--black);
+  border-color: var(--black);
+  box-shadow: 4px 4px 0px var(--black);
+}
+
+.btn-yellow:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--black);
+}
+
+.btn-yellow:active {
+  transform: translate(4px, 4px) scale(0.97);
+  box-shadow: none;
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  border: 1px solid var(--gray-light);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+/* ─── Section rhythm ─────────────────────────────────────────────────────── */
+.section-pad {
+  padding-top: clamp(64px, 10vw, 120px);
+  padding-bottom: clamp(64px, 10vw, 120px);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--off-white); }
+::-webkit-scrollbar-thumb { background: var(--gray-light); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-mid); }

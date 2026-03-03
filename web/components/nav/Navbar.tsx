@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useScroll } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const NAV_LINKS = [
     { label: "Work", href: "#work" },
@@ -12,100 +12,194 @@ const NAV_LINKS = [
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { scrollY } = useScroll();
 
     useEffect(() => {
-        return scrollY.on("change", (latest) => {
-            setIsScrolled(latest > 10);
-        });
-    }, [scrollY]);
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-    // Prevent scroll when mobile menu is open
     useEffect(() => {
-        if (isMobileMenuOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
+        document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
     }, [isMobileMenuOpen]);
 
     return (
         <>
-            <nav
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "border-b-[2px] border-solid border-black bg-white"
-                    : "bg-transparent"
-                    }`}
+            <motion.nav
+                initial={{ y: -80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="fixed top-0 left-0 right-0 z-50"
+                style={{
+                    height: "80px",
+                    display: "flex",
+                    alignItems: "center",
+                    background: isScrolled ? "rgba(255,255,255,0.95)" : "transparent",
+                    backdropFilter: isScrolled ? "blur(12px)" : "none",
+                    borderBottom: isScrolled ? "1px solid #E5E5E5" : "none",
+                    transition: "background 300ms ease, border 300ms ease, backdrop-filter 300ms ease",
+                }}
             >
-                <div className="container flex h-[80px] items-center justify-between px-8">
-                    <span className="font-sans text-[24px] font-black lowercase tracking-tighter text-black">
+                <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    {/* Logo */}
+                    <a
+                        href="#home"
+                        style={{
+                            fontFamily: "var(--font-display)",
+                            fontSize: "24px",
+                            fontWeight: 900,
+                            letterSpacing: "-0.04em",
+                            color: "#000",
+                            textDecoration: "none",
+                        }}
+                    >
                         plinth
-                    </span>
+                    </a>
 
-                    {/* Desktop Nav */}
-                    <div className="hidden items-center gap-8 md:flex">
+                    {/* Desktop links */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "40px" }} className="hidden md:flex">
                         {NAV_LINKS.map((link) => (
                             <a
                                 key={link.label}
                                 href={link.href}
-                                className="font-sans text-[16px] font-medium text-black transition-opacity hover:opacity-60"
+                                className="nav-link"
+                                style={{
+                                    fontSize: "15px",
+                                    fontWeight: 500,
+                                    color: "#000",
+                                    textDecoration: "none",
+                                    fontFamily: "var(--font-display)",
+                                }}
                             >
                                 {link.label}
                             </a>
                         ))}
                         <a
                             href="#contact"
-                            className="rounded-full border-2 border-black bg-white px-6 py-2.5 font-sans text-[16px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-none"
+                            className="btn btn-primary"
+                            style={{ fontSize: "14px", padding: "10px 24px" }}
                         >
-                            Contact Us
+                            Start a project
                         </a>
                     </div>
 
-                    {/* Mobile Nav Toggle */}
+                    {/* Mobile toggle */}
                     <button
-                        className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-yellow shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:hidden"
                         onClick={() => setIsMobileMenuOpen(true)}
+                        aria-label="Open menu"
+                        className="md:hidden"
+                        style={{
+                            width: "44px",
+                            height: "44px",
+                            borderRadius: "9999px",
+                            border: "2px solid #000",
+                            background: "#FF90E8",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "5px",
+                            cursor: "pointer",
+                        }}
                     >
-                        <svg className="h-6 w-6" fill="none" stroke="black" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
+                        <span style={{ display: "block", width: "18px", height: "2px", background: "#000", borderRadius: "2px" }} />
+                        <span style={{ display: "block", width: "14px", height: "2px", background: "#000", borderRadius: "2px", alignSelf: "flex-start", marginLeft: "3px" }} />
+                        <span style={{ display: "block", width: "18px", height: "2px", background: "#000", borderRadius: "2px" }} />
                     </button>
                 </div>
-            </nav>
+            </motion.nav>
 
-            {/* Mobile Menu Overlay */}
-            {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-[60] flex flex-col bg-pink px-8 pt-6 md:hidden">
-                    <div className="flex justify-end">
-                        <button
-                            className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-black bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] text-[24px] font-black"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            aria-label="Close Menu"
-                        >
-                            ✕
-                        </button>
-                    </div>
-                    <div className="flex flex-1 flex-col items-center justify-center gap-12">
-                        {NAV_LINKS.map((link) => (
-                            <a
-                                key={link.label}
-                                href={link.href}
+            {/* Mobile menu */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        key="mobile-menu"
+                        initial={{ opacity: 0, x: "100%" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: "100%" }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        style={{
+                            position: "fixed",
+                            inset: 0,
+                            zIndex: 60,
+                            background: "#000",
+                            display: "flex",
+                            flexDirection: "column",
+                            padding: "24px",
+                        }}
+                    >
+                        {/* Close */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "48px" }}>
+                            <span style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 900, letterSpacing: "-0.04em", color: "#fff" }}>
+                                plinth
+                            </span>
+                            <button
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="font-sans text-[48px] font-black text-black"
+                                aria-label="Close menu"
+                                style={{
+                                    width: "44px",
+                                    height: "44px",
+                                    borderRadius: "9999px",
+                                    border: "2px solid rgba(255,255,255,0.3)",
+                                    background: "transparent",
+                                    color: "#fff",
+                                    fontSize: "20px",
+                                    cursor: "pointer",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                }}
                             >
-                                {link.label}
-                            </a>
-                        ))}
-                        <a
+                                ✕
+                            </button>
+                        </div>
+
+                        {/* Links */}
+                        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "16px" }}>
+                            {NAV_LINKS.map((link, i) => (
+                                <motion.a
+                                    key={link.label}
+                                    href={link.href}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    initial={{ opacity: 0, x: -32 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                                    style={{
+                                        fontFamily: "var(--font-display)",
+                                        fontSize: "clamp(40px, 12vw, 72px)",
+                                        fontWeight: 900,
+                                        letterSpacing: "-0.04em",
+                                        color: "#fff",
+                                        textDecoration: "none",
+                                        borderBottom: "1px solid rgba(255,255,255,0.1)",
+                                        paddingBottom: "16px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    {link.label}
+                                    <span style={{ color: "#FF90E8", fontSize: "0.5em" }}>→</span>
+                                </motion.a>
+                            ))}
+                        </div>
+
+                        {/* CTA */}
+                        <motion.a
                             href="#contact"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="rounded-full border-4 border-black bg-white px-10 py-5 font-sans text-[24px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                            initial={{ opacity: 0, y: 24 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                            className="btn btn-yellow"
+                            style={{ fontSize: "18px", padding: "18px 32px", textDecoration: "none", textAlign: "center" }}
                         >
-                            Contact Us
-                        </a>
-                    </div>
-                </div>
-            )}
+                            Start a project →
+                        </motion.a>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }
