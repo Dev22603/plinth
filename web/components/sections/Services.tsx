@@ -51,14 +51,6 @@ export default function Services() {
                                     {service.body}
                                 </p>
                             </div>
-
-                            <div className="flex flex-wrap gap-2">
-                                {service.tags.map((tag) => (
-                                    <span key={tag} className="inline-block rounded-full border-2 border-black bg-white px-3 py-1 font-sans text-[12px] font-bold text-black">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
                         </motion.div>
                     ))}
                 </motion.div>

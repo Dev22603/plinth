@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { heroData } from "../../lib/data";
+
 
 export default function Hero() {
     return (
@@ -55,11 +55,11 @@ export default function Hero() {
                     transition={{ duration: 0.5 }}
                     className="mb-8 inline-block rounded-full border-2 border-black bg-white px-6 py-2 font-sans text-[14px] font-bold tracking-wide text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                 >
-                    {heroData.label}
+                    Available for projects
                 </motion.div>
 
                 <h1 className="mb-8 font-sans text-(--text-hero) font-black leading-[0.9] tracking-tighter text-black">
-                    {heroData.headline.map((line, i) => (
+                    {["Software", "built to", "scale."].map((line, i) => (
                         <motion.span
                             key={i}
                             initial={{ opacity: 0, y: 40 }}
@@ -82,7 +82,7 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.5 }}
                     className="mx-auto mb-12 max-w-2xl font-sans text-(--text-xl) font-medium leading-relaxed text-black"
                 >
-                    {heroData.subhead}
+                    Full-stack systems, automated pipelines, and apps engineered by a team that cares about structure.
                 </motion.p>
 
                 {/* CTAs */}
@@ -93,16 +93,16 @@ export default function Hero() {
                     className="flex flex-col items-center justify-center gap-6 sm:flex-row"
                 >
                     <a
-                        href={heroData.links[0].href}
+                        href="#work"
                         className="w-full sm:w-auto rounded-full border-4 border-black bg-yellow px-10 py-5 font-sans text-[20px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                     >
-                        {heroData.links[0].label}
+                        See our work
                     </a>
                     <a
-                        href={heroData.links[1].href}
+                        href="#contact"
                         className="w-full sm:w-auto rounded-full border-4 border-black bg-white px-10 py-5 font-sans text-[20px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                     >
-                        {heroData.links[1].label}
+                        Get in touch
                     </a>
                 </motion.div>
             </div>
