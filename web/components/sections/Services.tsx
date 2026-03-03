@@ -108,6 +108,7 @@ export default function Services() {
                         display: "grid",
                         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
                         gap: "24px",
+                        alignItems: "stretch",
                     }}
                 >
                     {services.map((service, index) => (

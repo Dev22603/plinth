@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="w-full">
+      <main className="w-full" style={{ overflowX: "hidden" }}>
         <Hero />
         <Services />
         <Work />
