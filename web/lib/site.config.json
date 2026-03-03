@@ -11,17 +11,11 @@
       "id": "dsa-tracker",
       "label": "DSA Progress Tracker",
       "project": "Multi-Source DSA Platform",
-      "descriptor": "A full-stack tracking platform with automated dataset generation",
-      "image": null,
+      "description": "A centralized platform for tracking coding progress across LeetCode, GeeksforGeeks, and Code360 — with automated dataset generation, LLM-powered query refinement, and a deeply optimized database schema that keeps everything lightning fast.",
       "links": {
         "live": null,
-        "github": "https://github.com"
+        "demo": null
       },
-      "metrics": [
-        { "value": "400+", "description": "problems tracked across multiple platforms" },
-        { "value": "JSON", "description": "structured automated dataset ingestion"    },
-        { "value": "API",  "description": "custom LLM-based query refinement"         }
-      ],
       "prose": [
         "We built a full stack DSA progress tracking platform using Next.js and PostgreSQL. The goal was to centralize problem tracking across LeetCode, GeeksforGeeks, and Code360.",
         "The heavy lifting was in the automated dataset generation. We aggregated sheets using search APIs, refined the queries with an LLM, and extracted company tags directly from extension network responses.",
@@ -32,17 +26,11 @@
       "id": "ecommerce",
       "label": "E-Commerce",
       "project": "Admin & Customer Workflows",
-      "descriptor": "Scale-ready e-commerce platform built on Express and React",
-      "image": null,
+      "description": "A complete e-commerce platform with a customer-facing storefront and a full admin dashboard — secured by JWT authentication, role-based access control, and a PostgreSQL schema built to handle real-world order complexity.",
       "links": {
         "live": null,
-        "github": "https://github.com"
+        "demo": null
       },
-      "metrics": [
-        { "value": "JWT",  "description": "role-based access control (RBAC)"  },
-        { "value": "REST", "description": "fully documented API services"      },
-        { "value": "SQL",  "description": "relational integrity enforced"      }
-      ],
       "prose": [
         "We engineered a complete e-commerce platform balancing dedicated Admin Dashboards with smooth Customer-facing workflows.",
         "Security and architecture were the primary focus. We secured access with JWT-based authentication and enforced strict RBAC to prevent sensitive route exposure.",
@@ -56,22 +44,19 @@
       "id": "flutter",
       "label": "Flutter Apps",
       "heading": "Apps that feel right.",
-      "body": "We build native-feeling applications from end to end, handling everything from architecture to the small interactions that make people actually enjoy using an app.",
-      "tags": ["Flutter", "Riverpod", "Animations", "APIs"]
+      "body": "We design and build cross-platform mobile apps that feel native on every device — from smooth onboarding flows to complex data-driven screens. You get one codebase, iOS and Android, and quality that users actually notice."
     },
     {
       "id": "full-stack",
       "label": "Full-Stack Web",
       "heading": "Systems with structure.",
-      "body": "Next.js frontends, scalable Node/Express backends, PostgreSQL databases. Clean architecture and code the next developer won't resent.",
-      "tags": ["Next.js", "Express", "Node.js", "PostgreSQL"]
+      "body": "We build web products end to end — fast, responsive frontends paired with secure, scalable backends and well-designed databases. Clean architecture means less tech debt and code your next developer won't resent."
     },
     {
       "id": "data",
-      "label": "Data & Systems",
-      "heading": "Pipelines that deliver.",
-      "body": "Automated dataset generation, search APIs, LLM refinement, and structural migrations.",
-      "tags": ["LLMs", "Prisma", "Python", "Data Pipelines"]
+      "label": "Data & Automation",
+      "heading": "Make your data work for you.",
+      "body": "We build pipelines that collect, clean, and structure your data automatically — so you stop doing it by hand. Whether it's integrating third-party sources, automating reports, or building internal tools around your data, we make it just work."
     }
   ],
 
@@ -80,7 +65,7 @@
   "team": [],
 
   "contact": {
-    "email": "hello@plinth.agency",
+    "formUrl": "https://forms.gle/YrLw9kDyqBtEry948",
     "note": "We'll get back to you within 24 hours."
   },
 
@@ -90,14 +75,13 @@
   ],
 
   "social": [
-    { "platform": "GitHub",   "href": "https://github.com",   "label": "GitHub"   },
-    { "platform": "LinkedIn", "href": "https://linkedin.com", "label": "LinkedIn" }
+    { "platform": "LinkedIn", "href": "https://www.linkedin.com/in/devbachani", "label": "LinkedIn" }
   ],
 
   "footer": {
     "logo": "Plinth",
     "tagline": "We build scalable software and platforms you can depend on.",
-    "email": "hello@plinth.agency",
+    "email": "devcodes2206@gmail.com",
     "copyright": "© 2026 · Plinth Agency"
   }
 }

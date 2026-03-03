@@ -3,12 +3,6 @@
 import { motion } from "motion/react";
 import { team, serviceAreas } from "../../lib/data";
 
-const STACK = [
-    "Next.js · Node.js · Express",
-    "PostgreSQL · Prisma · React",
-    "Flutter · Tailwind · LLMs",
-];
-
 export default function About() {
     return (
         <section
@@ -69,20 +63,12 @@ export default function About() {
                             </div>
                         </div>
 
-                        {/* Stack */}
+                        {/* What we build */}
                         <div>
-                            <h4 className="mb-3 font-sans text-[18px] font-black text-black">Stack</h4>
-                            <div className="flex flex-col gap-3 font-sans text-[16px] font-bold text-black">
-                                {STACK.map((line, i) => (
-                                    <div key={i} className="rounded border-2 border-black bg-off-white p-3 text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">{line}</div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Base */}
-                        <div>
-                            <h4 className="mb-3 font-sans text-[18px] font-black text-black">Base</h4>
-                            <p className="font-sans text-[16px] font-bold text-black">Ahmedabad, India</p>
+                            <h4 className="mb-3 font-sans text-[18px] font-black text-black">What we build</h4>
+                            <p className="font-sans text-[15px] font-medium leading-relaxed text-black/80">
+                                We can build anything — mobile apps, web platforms, backend systems, data pipelines. We are not limited by stack.
+                            </p>
                         </div>
 
                         {/* Serving — driven by config */}
@@ -92,7 +78,7 @@ export default function About() {
                                 <div className="flex flex-col gap-2">
                                     {serviceAreas.map((area) => (
                                         <div key={area.city} className="flex items-center gap-2 font-sans text-[15px] font-bold text-black">
-                                            <span className="inline-block h-2 w-2 flex-shrink-0 rounded-full bg-black" />
+                                            <span className="inline-block h-2 w-2 shrink-0 rounded-full bg-black" />
                                             {area.city}, {area.country}
                                         </div>
                                     ))}

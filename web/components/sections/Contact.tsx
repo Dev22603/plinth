@@ -28,10 +28,12 @@ export default function Contact() {
 
                     <div className="flex flex-col items-center justify-center gap-6 md:flex-row mb-16">
                         <a
-                            href={`mailto:${contactData.email}`}
-                            className="w-full md:w-auto rounded-full border-4 border-black bg-teal px-6 py-4 font-sans text-[16px] sm:text-[20px] md:text-[24px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-2 hover:translate-x-2 hover:shadow-none truncate"
+                            href={contactData.formUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full md:w-auto rounded-full border-4 border-black bg-teal px-8 py-4 font-sans text-[16px] sm:text-[20px] md:text-[22px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-2 hover:translate-x-2 hover:shadow-none"
                         >
-                            {contactData.email}
+                            Fill out our contact form →
                         </a>
                     </div>
 
