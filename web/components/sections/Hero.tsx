@@ -2,108 +2,103 @@
 
 import { motion } from "motion/react";
 
-
 export default function Hero() {
     return (
-        <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-off-white pt-20 px-8">
-            {/* Decorative Neo-brutalist Shapes */}
-            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-                {/* Top Left Circle */}
-                <motion.div
-                    initial={{ scale: 0, rotate: -45 }}
-                    animate={{ scale: 1, rotate: -12 }}
-                    transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-                    className="absolute left-[5%] top-[15%] flex h-32 w-32 items-center justify-center rounded-full border-4 border-black bg-pink hidden md:flex"
-                >
-                    <span className="font-sans text-[48px] font-black text-black">P</span>
-                </motion.div>
+        <section id="home" className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[var(--color-base)] px-6 pt-24 md:px-12">
 
-                {/* Top Right Square */}
-                <motion.div
-                    initial={{ scale: 0, rotate: 45 }}
-                    animate={{ scale: 1, rotate: 12 }}
-                    transition={{ duration: 0.8, delay: 0.2, type: "spring", bounce: 0.4 }}
-                    className="absolute right-[10%] top-[20%] flex h-24 w-24 items-center justify-center border-4 border-black bg-teal hidden md:flex"
-                >
-                    <span className="font-sans text-[40px] font-black text-black">L</span>
-                </motion.div>
+            {/* Background precise grid */}
+            <div className="pointer-events-none absolute inset-0 z-0 opacity-10"
+                style={{ backgroundImage: 'linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-                {/* Bottom Left Triangle */}
-                <motion.div
-                    initial={{ scale: 0, y: 100 }}
-                    animate={{ scale: 1, y: 0, rotate: -6 }}
-                    transition={{ duration: 0.8, delay: 0.4, type: "spring", bounce: 0.4 }}
-                    className="absolute bottom-[20%] left-[10%] h-32 w-32 border-4 border-black bg-yellow hidden lg:block"
-                ></motion.div>
+            {/* Glowing Accent */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.15 }}
+                transition={{ duration: 2 }}
+                className="pointer-events-none absolute -top-[20%] -right-[10%] h-[600px] w-[600px] rounded-full bg-[var(--color-accent)] blur-[120px]"
+            />
 
-                {/* Bottom Right Circle */}
-                <motion.div
-                    initial={{ scale: 0, rotate: 90 }}
-                    animate={{ scale: 1, rotate: -24 }}
-                    transition={{ duration: 0.8, delay: 0.6, type: "spring", bounce: 0.4 }}
-                    className="absolute bottom-[25%] right-[10%] flex h-28 w-28 items-center justify-center rounded-full border-4 border-black bg-blue hidden md:flex"
-                >
-                    <span className="font-sans text-[48px] font-black text-black">H</span>
-                </motion.div>
-            </div>
+            <div className="relative z-10 w-full max-w-7xl mx-auto">
+                <div className="flex flex-col items-start gap-8 md:w-4/5">
 
-            {/* Main Content */}
-            <div className="relative z-10 mx-auto max-w-4xl text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-8 inline-block rounded-full border-2 border-black bg-white px-6 py-2 font-sans text-[14px] font-bold tracking-wide text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                >
-                    Available for projects
-                </motion.div>
+                    {/* Status Badge */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="tech-border flex items-center gap-3 bg-[var(--color-surface)] px-4 py-2 font-mono text-[var(--text-sm)] uppercase tracking-wider text-[var(--color-text)]"
+                    >
+                        <span className="h-2 w-2 rounded-full bg-[var(--color-accent)] animate-pulse shadow-[var(--shadow-glow)]" />
+                        Available for Engineering Contracts
+                    </motion.div>
 
-                <h1 className="mb-8 font-sans text-(--text-hero) font-black leading-[0.9] tracking-tighter text-black">
-                    {["Software", "built to", "scale."].map((line, i) => (
-                        <motion.span
-                            key={i}
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{
-                                duration: 0.6,
-                                delay: 0.2 + i * 0.1,
-                                ease: "easeOut",
-                            }}
-                            className="block"
+                    {/* Massive Typography */}
+                    <h1 className="font-sans text-[var(--text-hero)] font-black leading-[0.85] tracking-tighter text-[var(--color-text)] uppercase">
+                        {["We build", "better", "systems.", "Faster."].map((line, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 0.1 + i * 0.1,
+                                    ease: [0.16, 1, 0.3, 1], // Custom fast-out slow-in
+                                }}
+                                className="block"
+                            >
+                                {i === 3 ? (
+                                    <span className="text-[var(--color-accent)] clip-diagonal bg-[var(--color-surface)] px-4 pb-2 -ml-2">{line}</span>
+                                ) : (
+                                    line
+                                )}
+                            </motion.span>
+                        ))}
+                    </h1>
+
+                    {/* Precise Subhead */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.6 }}
+                        className="max-w-xl font-mono text-[var(--text-lg)] text-[var(--color-text-muted)] leading-relaxed border-l-2 border-[var(--color-accent)] pl-6"
+                    >
+                        Plinth is an elite engineering agency. We leverage AI tooling (Cursor, Claude) to accelerate delivery, backed by a fundamental understanding of scalable system design. Stop waiting months for startup MVPs.
+                    </motion.p>
+
+                    {/* Hard CTAs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.8 }}
+                        className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
+                    >
+                        <a
+                            href="#contact"
+                            className="group tech-border relative overflow-hidden bg-[var(--color-accent)] px-8 py-4 font-mono text-[16px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-[var(--color-accent-hover)]"
                         >
-                            {line}
-                        </motion.span>
-                    ))}
-                </h1>
+                            <span className="relative z-10 flex items-center gap-2">
+                                Request a Quote
+                                <span className="transform transition-transform group-hover:translate-x-1">→</span>
+                            </span>
+                        </a>
+                        <a
+                            href="#work"
+                            className="group tech-border bg-[var(--color-surface)] px-8 py-4 font-mono text-[16px] font-bold uppercase tracking-wider text-[var(--color-text)] transition-colors hover:bg-[var(--color-border-light)]"
+                        >
+                            <span className="relative z-10">Review Our Work</span>
+                        </a>
+                    </motion.div>
+                </div>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                    className="mx-auto mb-12 max-w-2xl font-sans text-(--text-xl) font-medium leading-relaxed text-black"
-                >
-                    Full-stack systems, automated pipelines, and apps engineered by a team that cares about structure.
-                </motion.p>
-
-                {/* CTAs */}
+                {/* Scroll Indicator */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.7 }}
-                    className="flex flex-col items-center justify-center gap-6 sm:flex-row"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.5, duration: 1 }}
+                    className="absolute right-0 bottom-[-10vh] flex flex-col items-center gap-4 hidden lg:flex"
                 >
-                    <a
-                        href="#work"
-                        className="w-full sm:w-auto rounded-full border-4 border-black bg-yellow px-10 py-5 font-sans text-[20px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                    >
-                        See our work
-                    </a>
-                    <a
-                        href="#contact"
-                        className="w-full sm:w-auto rounded-full border-4 border-black bg-white px-10 py-5 font-sans text-[20px] font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                    >
-                        Get in touch
-                    </a>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] rotate-90 origin-right whitespace-nowrap">Scroll to explore</span>
+                    <div className="h-24 w-px bg-gradient-to-b from-[var(--color-text-muted)] to-transparent" />
                 </motion.div>
             </div>
         </section>

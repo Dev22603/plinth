@@ -1,5 +1,6 @@
 import Navbar from "../components/nav/Navbar";
 import Hero from "../components/sections/Hero";
+import Manifesto from "../components/sections/Manifesto";
 import Services from "../components/sections/Services";
 import Work from "../components/sections/Work";
 import About from "../components/sections/About";
@@ -12,8 +13,9 @@ export default function Home() {
       <Navbar />
       <main className="w-full">
         <Hero />
-        <Services />
+        <Manifesto />
         <Work />
+        <Services />
         <About />
         <Contact />
       </main>
